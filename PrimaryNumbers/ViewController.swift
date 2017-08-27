@@ -8,12 +8,15 @@
 
 import UIKit
 
-typealias Pair = (value: Int, primary: Bool)
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   @IBOutlet var collectionView: UICollectionView!
   @IBOutlet var numLbl: UITextField!
-  private var isPrimary = [Pair]()
+  @IBOutlet var searchBar: UISearchBar!
+  
+  
+  private var primaryNumbers = [Int]()
+  private var primary = Primary(num: 1)
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -23,6 +26,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
   func setupUI() {
     collectionView.dataSource = self
     collectionView.delegate = self
+    searchBar.delegate = self
+    
+    collectionView.layer.cornerRadius = 5
 
   }
 
@@ -32,42 +38,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
       return
     }
     if number > 1 {
-      let primary = Primary(num: number)
-      isPrimary = primary.calc()
+      primary = Primary(num: number)
+      primaryNumbers = primary.calcNext()
       collectionView.reloadData()
     }
     
   }
   
-  @IBAction func collect(_ sender: UIButton) {
-    let nonPrimaryIndixes = isPrimary.flatMap { $0.primary ? nil : IndexPath(row: $0.value - 1, section: 0) }
-    isPrimary = isPrimary.filter { $0.primary }
-    if isPrimary.count < 5000 {
-      collectionView.deleteItems(at: nonPrimaryIndixes)
-    } else {
-      collectionView.reloadData()
-    }
+  private func calcNext() {
+    let newNumbers = primary.calcNext()
+    let indexPaths = (primaryNumbers.count..<primaryNumbers.count + newNumbers.count).map { IndexPath(row: $0, section: 0) }
+    primaryNumbers += newNumbers
+
+    collectionView.insertItems(at: indexPaths)
   }
-  
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return isPrimary.count - 1
+    return primaryNumbers.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "numbers", for: indexPath) as! NumberCell
-    cell.setup(num: isPrimary[indexPath.row + 1].value, isPrimary: isPrimary[indexPath.row + 1].primary)
+    cell.setup(num: primaryNumbers[indexPath.row])
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     var width = CGFloat(0.0)
 
-    if isPrimary[indexPath.row + 1].value < 10000 {
+    if primaryNumbers[indexPath.row] < 10000 {
       width = collectionView.frame.size.width / 10
     }
     else {
@@ -76,5 +79,24 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     return CGSize(width: width, height: width)
   }
+  
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    guard let indexPath = collectionView.indexPathForItem(at: CGPoint(x: 20, y: scrollView.contentOffset.y)) else {
+      return
+    }
+    if primary.hasNext && (indexPath.row > (primary.numbers.count * 3 / 4)) {
+      calcNext()
+    }
+    
+  }
 }
 
+extension ViewController: UISearchBarDelegate {
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+    collectionView.scrollToItem(at: IndexPath(row: 1000, section: 0), at: .bottom, animated: true)
+  }
+  
+  func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
+  }
+}

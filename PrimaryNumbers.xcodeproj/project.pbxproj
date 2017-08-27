@@ -12,6 +12,8 @@
 		D85C69491F330D3D00E6EDAD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85C69471F330D3D00E6EDAD /* Main.storyboard */; };
 		D85C694B1F330D3E00E6EDAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D85C694A1F330D3E00E6EDAD /* Assets.xcassets */; };
 		D85C694E1F330D3E00E6EDAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85C694C1F330D3E00E6EDAD /* LaunchScreen.storyboard */; };
+		D85C69561F33153000E6EDAD /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C69551F33153000E6EDAD /* NumberCell.swift */; };
+		D85C69581F34338A00E6EDAD /* Primary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C69571F34338A00E6EDAD /* Primary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		D85C694A1F330D3E00E6EDAD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D85C694D1F330D3E00E6EDAD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D85C694F1F330D3F00E6EDAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D85C69551F33153000E6EDAD /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		D85C69571F34338A00E6EDAD /* Primary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				D85C694A1F330D3E00E6EDAD /* Assets.xcassets */,
 				D85C694C1F330D3E00E6EDAD /* LaunchScreen.storyboard */,
 				D85C694F1F330D3F00E6EDAD /* Info.plist */,
+				D85C69551F33153000E6EDAD /* NumberCell.swift */,
+				D85C69571F34338A00E6EDAD /* Primary.swift */,
 			);
 			path = PrimaryNumbers;
 			sourceTree = "<group>";
@@ -137,8 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D85C69581F34338A00E6EDAD /* Primary.swift in Sources */,
 				D85C69461F330D3B00E6EDAD /* ViewController.swift in Sources */,
 				D85C69441F330D3B00E6EDAD /* AppDelegate.swift in Sources */,
+				D85C69561F33153000E6EDAD /* NumberCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

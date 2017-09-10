@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -38,15 +38,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B90-0X-eAV">
-                                                    <rect key="frame" x="4" y="15" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B90-0X-eAV">
+                                                    <rect key="frame" x="4" y="4" width="42" height="42"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="B90-0X-eAV" secondAttribute="trailing" constant="4" id="43x-ej-LuF"/>
+                                            <constraint firstAttribute="bottom" secondItem="B90-0X-eAV" secondAttribute="bottom" constant="4" id="DZX-HU-gNh"/>
+                                            <constraint firstItem="B90-0X-eAV" firstAttribute="top" secondItem="mCL-jW-7VK" secondAttribute="top" constant="4" id="eIf-ea-SDJ"/>
+                                            <constraint firstItem="B90-0X-eAV" firstAttribute="leading" secondItem="mCL-jW-7VK" secondAttribute="leading" constant="4" id="uAl-ua-AaF"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="numLbl" destination="B90-0X-eAV" id="Akl-ia-4MK"/>
                                         </connections>
@@ -63,8 +68,14 @@
                                 <rect key="frame" x="8" y="71" width="220" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Идет вычисление чисел" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLZ-jn-3ld">
+                                <rect key="frame" x="63.5" y="304" width="193" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1jL-Xc-8Wn">
                                 <rect key="frame" x="236" y="71" width="76" height="30"/>
                                 <state key="normal" title="Посчитать"/>
@@ -72,6 +83,12 @@
                                     <action selector="calc:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s61-Uj-GDd"/>
                                 </connections>
                             </button>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="MWe-Rc-G0f">
+                                <rect key="frame" x="42" y="351.5" width="236" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="236" id="NPY-dA-Tpm"/>
+                                </constraints>
+                            </progressView>
                             <searchBar contentMode="redraw" placeholder="Введите число для поиска" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-3M-c7r">
                                 <rect key="frame" x="0.0" y="101" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
@@ -82,26 +99,32 @@
                         </subviews>
                         <color key="backgroundColor" red="0.73253435860000005" green="0.73253435860000005" blue="0.73253435860000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="tLZ-jn-3ld" firstAttribute="centerX" secondItem="dlw-dK-aQD" secondAttribute="centerX" id="4Xz-4T-Hm8"/>
                             <constraint firstAttribute="trailing" secondItem="ERT-9E-4ua" secondAttribute="trailing" constant="8" id="6I2-td-Djd"/>
                             <constraint firstItem="Y5Q-3M-c7r" firstAttribute="top" secondItem="anD-P8-l6g" secondAttribute="bottom" symbolic="YES" id="6WK-Ut-v8w"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dlw-dK-aQD" secondAttribute="bottom" constant="8" symbolic="YES" id="DY8-Wn-YF3"/>
+                            <constraint firstItem="MWe-Rc-G0f" firstAttribute="centerX" secondItem="dlw-dK-aQD" secondAttribute="centerX" id="GaR-la-Tf3"/>
                             <constraint firstItem="ERT-9E-4ua" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="NeX-7B-P0x"/>
                             <constraint firstItem="dlw-dK-aQD" firstAttribute="top" secondItem="Y5Q-3M-c7r" secondAttribute="bottom" symbolic="YES" id="RtD-AS-1ox"/>
                             <constraint firstItem="anD-P8-l6g" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="RwC-OJ-8SO"/>
                             <constraint firstItem="ERT-9E-4ua" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Tc1-Pj-Ntf"/>
                             <constraint firstItem="dlw-dK-aQD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="Tea-hN-Gw8"/>
+                            <constraint firstItem="MWe-Rc-G0f" firstAttribute="top" secondItem="tLZ-jn-3ld" secondAttribute="bottom" constant="26.5" id="WKC-5G-b7T"/>
                             <constraint firstItem="anD-P8-l6g" firstAttribute="top" secondItem="ERT-9E-4ua" secondAttribute="bottom" constant="2" id="bAM-I1-AGU"/>
                             <constraint firstAttribute="trailing" secondItem="Y5Q-3M-c7r" secondAttribute="trailing" id="hz6-FD-zch"/>
                             <constraint firstItem="1jL-Xc-8Wn" firstAttribute="leading" secondItem="anD-P8-l6g" secondAttribute="trailing" constant="8" symbolic="YES" id="imh-Dz-N2F"/>
                             <constraint firstAttribute="trailing" secondItem="1jL-Xc-8Wn" secondAttribute="trailing" constant="8" id="pXR-6N-XsV"/>
+                            <constraint firstItem="MWe-Rc-G0f" firstAttribute="centerY" secondItem="dlw-dK-aQD" secondAttribute="centerY" id="ph7-uc-p67"/>
                             <constraint firstItem="Y5Q-3M-c7r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="r7g-hw-w5a"/>
                             <constraint firstAttribute="trailing" secondItem="dlw-dK-aQD" secondAttribute="trailing" constant="8" id="uuK-Qr-aZW"/>
                             <constraint firstItem="1jL-Xc-8Wn" firstAttribute="baseline" secondItem="anD-P8-l6g" secondAttribute="baseline" id="x1I-hu-UKv"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calculateLbl" destination="tLZ-jn-3ld" id="2ah-L4-hyj"/>
                         <outlet property="collectionView" destination="dlw-dK-aQD" id="Po5-yz-BEJ"/>
                         <outlet property="numLbl" destination="anD-P8-l6g" id="pd4-zu-9ha"/>
+                        <outlet property="progressView" destination="MWe-Rc-G0f" id="sCK-DL-7n7"/>
                         <outlet property="searchBar" destination="Y5Q-3M-c7r" id="XEu-ZV-Swi"/>
                     </connections>
                 </viewController>

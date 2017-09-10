@@ -11,12 +11,12 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
 
   @IBOutlet var collectionView: UICollectionView!
-  @IBOutlet var numLbl: UITextField!
+  @IBOutlet var numTxtField: UITextField!
   @IBOutlet var searchBar: UISearchBar!
 	@IBOutlet var calculateLbl: UILabel!
 	@IBOutlet var progressView: UIProgressView!
   
-	fileprivate var primary: Primary!
+	fileprivate var primary: Primary?
 	
 	fileprivate var findedIndex: Int? = nil{
 		didSet {
@@ -39,7 +39,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     collectionView.dataSource = self
     collectionView.delegate = self
     searchBar.delegate = self
-    
+    numTxtField.delegate = self
     collectionView.layer.cornerRadius = 5
 		hideProgress()
 
@@ -62,24 +62,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 		}
 	}
 
-  @IBAction func calc(_ sender: Any) {
+  func calc(_ sender: Any) {
     self.view.endEditing(true)
-		guard let text = numLbl.text, let number = getCorrectNumber(text: text) else {
+		guard let text = numTxtField.text, let number = getCorrectNumber(text: text) else {
 			return
 		}
+    
+    cleanCollectionView()
 		showProgress()
 		collectionView.isUserInteractionEnabled = false
-		//_ = primary.calcNext(count: 10000)
-		DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+    
+    DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
 			self.primary = Primary(num: number, onProgress: self.onProgress)
-			_ = self.primary.calcAll()
+			_ = self.primary!.calcAll()
 			DispatchQueue.main.async { [unowned self] in
 				self.collectionView.reloadData()
 				self.collectionView.isUserInteractionEnabled = true
 				self.hideProgress()
 			}
 		}
-		
+  }
+  
+  private func cleanCollectionView() {
+    primary = nil
+    self.collectionView.reloadData()
   }
 	
 	func textFieldDidEndEditing(_ textField: UITextField) {
@@ -92,8 +98,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 	}
   
 	fileprivate func calcNext(count: Int) {
-		let startIndex = primary.numbers.count
-    let newNumbers = primary.calcNext(count: count)
+		let startIndex = primary!.numbers.count
+    let newNumbers = primary!.calcNext(count: count)
     let indexPaths = (startIndex..<startIndex + newNumbers.count).map { IndexPath(row: $0, section: 0) }
 
     collectionView.insertItems(at: indexPaths)
@@ -110,14 +116,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "numbers", for: indexPath) as! NumberCell
 		
-		cell.setup(num: primary.numbers[indexPath.row], selected: isFinded(index: indexPath.row))
+		cell.setup(num: primary!.numbers[indexPath.row], selected: isFinded(index: indexPath.row))
     return cell
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     var width = CGFloat(0.0)
 
-    if primary.numbers[indexPath.row] < 10000 {
+    if primary!.numbers[indexPath.row] < 10000 {
       width = collectionView.frame.size.width / 10
     }
     else {
@@ -159,6 +165,10 @@ extension ViewController: UISearchBarDelegate {
 		guard let text = searchBar.text, let number = getCorrectNumber(text: text) else {
 			return
 		}
+    guard let primary = primary else {
+      errorAlert(title: "Поиск", message: "Простые числа еще не рассчитаны")
+      return
+    }
 		if number > primary.num {
 			errorAlert(title: "Поиск", message: "Число \(searchBar.text!) выходит за пределы рассчитанных")
 			return
@@ -176,12 +186,9 @@ extension ViewController: UISearchBarDelegate {
   }
 	
 	func searchIndex(number: Int) -> Int? {
-		guard let last = primary.numbers.last else {
-			return nil
-		}
-		if primary.hasNext {
-			calcNext(count: 10000)
-		}
+    guard let primary = primary else {
+      fatalError("Primary values are not calculated")
+    }
 		return primary.index(of: number)
 		
 	}

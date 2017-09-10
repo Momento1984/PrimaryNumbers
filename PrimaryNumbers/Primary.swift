@@ -57,7 +57,7 @@ class Primary {
 			}
 		}
 		
-		numbers = isPrimary.dropFirst(2).indices.flatMap { isPrimary[$0] ? $0 : nil }
+		numbers = isPrimary.dropFirst(1).indices.flatMap { isPrimary[$0] ? $0 : nil }
 		
 		return numbers
 	}

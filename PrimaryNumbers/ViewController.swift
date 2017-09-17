@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
+class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
 
   @IBOutlet var collectionView: UICollectionView!
   @IBOutlet var numTxtField: UITextField!
@@ -39,6 +39,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     collectionView.dataSource = self
     collectionView.delegate = self
     searchBar.delegate = self
+    searchBar.layer.borderColor = UIColor.white.cgColor
     numTxtField.delegate = self
     collectionView.layer.cornerRadius = 5
 		hideProgress()
@@ -113,37 +114,18 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     return primary?.numbers.count ?? 0
   }
   
+  func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    let cell = cell as! NumberCell
+    cell.setup(num: primary!.numbers[indexPath.row])
+  }
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "numbers", for: indexPath) as! NumberCell
 		
-		cell.setup(num: primary!.numbers[indexPath.row], selected: isFinded(index: indexPath.row))
+		cell.setup(num: primary!.numbers[indexPath.row])
     return cell
   }
 
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    var width = CGFloat(0.0)
-
-    if primary!.numbers[indexPath.row] < 10000 {
-      width = collectionView.frame.size.width / 10
-    }
-    else {
-      width = collectionView.frame.size.width / 5
-  
-    }
-    return CGSize(width: width, height: width)
-  }
-  
-  func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    /*guard let indexPath = collectionView.indexPathForItem(at: CGPoint(x: 20, y: scrollView.contentOffset.y)) else {
-      return
-    }
-    if primary.hasNext && (indexPath.row > (primary.numbers.count * 3 / 4)) {
-			calcNext(count: 10000)
-    }*/
-    
-  }
-	
-	func errorAlert(title: String, message: String) {
+  func errorAlert(title: String, message: String) {
 		let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Закрыть", style: .cancel, handler: nil))
 		present(alert, animated: true, completion: nil)
@@ -173,25 +155,8 @@ extension ViewController: UISearchBarDelegate {
 			errorAlert(title: "Поиск", message: "Число \(searchBar.text!) выходит за пределы рассчитанных")
 			return
 		}
-		guard let index = primary.index(of: number) else {
-			errorAlert(title: "Поиск", message: "Число \(searchBar.text!) составное")
-			return
-		}
-		let indexPath = IndexPath(row: index, section: 0)
-		findedIndex = index
-
-    collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
-
-	
+    findNumber(number)
   }
-	
-	func searchIndex(number: Int) -> Int? {
-    guard let primary = primary else {
-      fatalError("Primary values are not calculated")
-    }
-		return primary.index(of: number)
-		
-	}
 	
 	func getCorrectNumber(text: String) -> Int? {
 		guard let number = Int(text), number > 0 else {
@@ -204,4 +169,20 @@ extension ViewController: UISearchBarDelegate {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 		searchBar.resignFirstResponder()
   }
+  
+  private func findNumber(_ number: Int) {
+    collectionView.allowsMultipleSelection = false
+    let (firstIndex, secondIndex) = primary!.index(of: number)
+    selectCell(at: firstIndex)
+    if let secondIndex = secondIndex {
+      collectionView.allowsMultipleSelection = true
+      selectCell(at: secondIndex)
+    }
+  }
+  
+  private func selectCell(at index: Int) {
+    let indexPath = IndexPath(row: index, section: 0)
+    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+  }
+
 }

@@ -82,15 +82,16 @@
                                     <constraint firstAttribute="width" constant="236" id="NPY-dA-Tpm"/>
                                 </constraints>
                             </progressView>
-                            <searchBar contentMode="redraw" placeholder="Введите число для поиска" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-3M-c7r">
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите число для поиска" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-3M-c7r">
                                 <rect key="frame" x="0.0" y="101" width="320" height="44"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="9cI-eX-HLx"/>
                                 </connections>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" red="0.73253435860000005" green="0.73253435860000005" blue="0.73253435860000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="tLZ-jn-3ld" firstAttribute="centerX" secondItem="dlw-dK-aQD" secondAttribute="centerX" id="4Xz-4T-Hm8"/>
                             <constraint firstAttribute="trailing" secondItem="anD-P8-l6g" secondAttribute="trailing" constant="8" id="4fQ-LA-3bu"/>

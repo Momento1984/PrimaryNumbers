@@ -22,6 +22,7 @@ class Primary {
     var isPrimary = [Bool](repeating: true, count: num + 1)
     for i in 2..<end {
       if isPrimary[i] {
+				
         onProgress(Float(i) / Float(end))
         for k in stride(from: i * i, to: num + 1, by: i) {
           isPrimary[k] = false

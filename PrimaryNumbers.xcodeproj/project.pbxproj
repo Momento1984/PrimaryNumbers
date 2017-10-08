@@ -16,6 +16,9 @@
 		D85C694E1F330D3E00E6EDAD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D85C694C1F330D3E00E6EDAD /* LaunchScreen.storyboard */; };
 		D85C69561F33153000E6EDAD /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C69551F33153000E6EDAD /* NumberCell.swift */; };
 		D85C69581F34338A00E6EDAD /* Primary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D85C69571F34338A00E6EDAD /* Primary.swift */; };
+		D883334D1F8A66F70062E6FD /* RangedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D883334C1F8A66F70062E6FD /* RangedSlider.swift */; };
+		D883334F1F8A672E0062E6FD /* RangedSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = D883334E1F8A672E0062E6FD /* RangedSlider.xib */; };
+		D88333511F8A75230062E6FD /* MaxRangedSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88333501F8A75230062E6FD /* MaxRangedSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +33,9 @@
 		D85C694F1F330D3F00E6EDAD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D85C69551F33153000E6EDAD /* NumberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
 		D85C69571F34338A00E6EDAD /* Primary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Primary.swift; sourceTree = "<group>"; };
+		D883334C1F8A66F70062E6FD /* RangedSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangedSlider.swift; sourceTree = "<group>"; };
+		D883334E1F8A672E0062E6FD /* RangedSlider.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RangedSlider.xib; sourceTree = "<group>"; };
+		D88333501F8A75230062E6FD /* MaxRangedSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaxRangedSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +78,9 @@
 				D85C69571F34338A00E6EDAD /* Primary.swift */,
 				D8206E7A1F71630200C00A1C /* ErrorHandler.swift */,
 				D8206E7C1F7169FD00C00A1C /* Presenter.swift */,
+				D883334C1F8A66F70062E6FD /* RangedSlider.swift */,
+				D883334E1F8A672E0062E6FD /* RangedSlider.xib */,
+				D88333501F8A75230062E6FD /* MaxRangedSlider.swift */,
 			);
 			path = PrimaryNumbers;
 			sourceTree = "<group>";
@@ -103,7 +112,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Виталий Антипов";
 				TargetAttributes = {
 					D85C693F1F330D3900E6EDAD = {
@@ -139,6 +148,7 @@
 				D85C694E1F330D3E00E6EDAD /* LaunchScreen.storyboard in Resources */,
 				D85C694B1F330D3E00E6EDAD /* Assets.xcassets in Resources */,
 				D85C69491F330D3D00E6EDAD /* Main.storyboard in Resources */,
+				D883334F1F8A672E0062E6FD /* RangedSlider.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +160,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8206E7D1F7169FD00C00A1C /* Presenter.swift in Sources */,
+				D883334D1F8A66F70062E6FD /* RangedSlider.swift in Sources */,
+				D88333511F8A75230062E6FD /* MaxRangedSlider.swift in Sources */,
 				D85C69581F34338A00E6EDAD /* Primary.swift in Sources */,
 				D85C69461F330D3B00E6EDAD /* ViewController.swift in Sources */,
 				D8206E7B1F71630200C00A1C /* ErrorHandler.swift in Sources */,
@@ -190,7 +202,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -198,7 +212,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -227,6 +245,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -241,7 +260,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -249,7 +270,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -270,6 +295,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -284,7 +310,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = home.PrimaryNumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -297,7 +323,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = home.PrimaryNumbers;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

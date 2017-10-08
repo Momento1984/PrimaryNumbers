@@ -15,6 +15,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
   @IBOutlet var searchBar: UISearchBar!
   @IBOutlet var calculateLbl: UILabel!
   @IBOutlet var progressView: UIProgressView!
+  @IBOutlet var rangedSlider: RangedSlider!
   
   fileprivate let presenter = Presenter()
   
@@ -43,6 +44,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     numTxtField.delegate = self
     collectionView.layer.cornerRadius = 5
     hideProgress()
+    
+    let rangedSliderView = RangedSlider.create()
+    rangedSliderView.frame = rangedSlider.bounds
+    rangedSlider.addSubview(rangedSliderView)
     
   }
   

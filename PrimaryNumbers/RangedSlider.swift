@@ -31,6 +31,8 @@ class RangedSlider: UIView {
       maxSlider.setValue(minSlider.value, animated: true)
     }
 		maxTxt.text = "\(Int(maxSlider.value))"
+		minTxt.text = "\(Int(minSlider.value))"
+
   }
 	
   @IBAction private func minSliderChanged(_ sender: Any) {
@@ -38,6 +40,7 @@ class RangedSlider: UIView {
       minSlider.setValue(maxSlider.value, animated: true)
     }
 		minTxt.text = "\(Int(minSlider.value))"
+		maxTxt.text = "\(Int(maxSlider.value))"
 
   }
 	

@@ -136,7 +136,9 @@ extension ViewController: UISearchBarDelegate {
   
   private func findNumber(_ number: Int) {
     collectionView.allowsMultipleSelection = false
-    let (firstIndex, secondIndex) = presenter.index(of: number)
+		guard let (firstIndex, secondIndex) = presenter.index(of: number) else {
+			return
+		}
     selectCell(at: firstIndex)
     if let secondIndex = secondIndex {
       collectionView.allowsMultipleSelection = true

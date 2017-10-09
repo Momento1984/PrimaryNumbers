@@ -37,11 +37,11 @@ class Presenter {
 	}
 
 	func calc(min: Int, max: Int, onProgress: @escaping (Float) -> (), completion: @escaping () -> ()) {
-		if let primary = primary, primary.num > max {
-			maxIndex = index(of: max).0
+		if let primary = primary, primary.num >= max {
+			maxIndex = primary.index(of: max).0
 			numbers = primary.numbers.dropLast(primary.numbers.count - maxIndex)
 
-			minIndex = index(of: min).0
+			minIndex = primary.index(of: min).0
 			numbers = numbers.dropFirst(minIndex)
 
 			completion()
@@ -51,7 +51,7 @@ class Presenter {
 				self.primary = Primary(num: max, onProgress: onProgress)
 				_ = self.primary!.calcAll()
 				
-				self.minIndex = self.index(of: min).0
+				self.minIndex = self.primary!.index(of: min).0
 				self.numbers = self.primary!.numbers.dropFirst(self.minIndex)
 				
 				completion()
@@ -67,8 +67,14 @@ class Presenter {
 		return numbers.count
 	}
 
-	func index(of number: Int) -> (Int, Int?) {
-		return primary!.index(of: number)
+	func index(of number: Int) -> (Int, Int?)? {
+		let rawIndixes = primary!.index(of: number)
+		let diffLeftIndex = rawIndixes.0 - minIndex
+		if diffLeftIndex > 0 {
+			return (diffLeftIndex, rawIndixes.1.map { $0 - minIndex } )
+		} else {
+			return nil
+		}
 	}
 
 	func number(at index: Int) -> Int? {

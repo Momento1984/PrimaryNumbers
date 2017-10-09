@@ -58,7 +58,12 @@ class Primary {
     if numbers[lo] == number {
       return (lo, nil)
     } else {
-      return (lo - 1, lo)
+			if lo > 0 {
+				return (lo - 1, lo)
+			} else {
+				return (lo, lo + 1)
+			}
+			
     }
   }
 }

@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlw-dK-aQD">
-                                <rect key="frame" x="8" y="195" width="304" height="365"/>
+                                <rect key="frame" x="8" y="213" width="304" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="YMU-Fe-xen">
                                     <size key="itemSize" width="50" height="50"/>
@@ -64,54 +64,40 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" horizontalCompressionResistancePriority="747" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="max" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="anD-P8-l6g">
-                                <rect key="frame" x="164" y="71" width="148" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Идет вычисление чисел" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLZ-jn-3ld">
-                                <rect key="frame" x="63.5" y="329" width="193" height="21"/>
+                                <rect key="frame" x="63.5" y="338" width="193" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.59999999999999998" translatesAutoresizingMaskIntoConstraints="NO" id="MWe-Rc-G0f">
-                                <rect key="frame" x="42" y="376.5" width="236" height="2"/>
+                                <rect key="frame" x="42" y="385.5" width="236" height="2"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="236" id="NPY-dA-Tpm"/>
                                 </constraints>
                             </progressView>
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Введите число для поиска" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y5Q-3M-c7r">
-                                <rect key="frame" x="0.0" y="139" width="320" height="56"/>
+                                <rect key="frame" x="0.0" y="157" width="320" height="56"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="9cI-eX-HLx"/>
                                 </connections>
                             </searchBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="245" horizontalCompressionResistancePriority="747" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="min" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8l-z3-Oh7">
-                                <rect key="frame" x="8" y="71" width="148" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits" keyboardType="numbersAndPunctuation" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="6fB-rF-BL1" customClass="RangedSlider" customModule="PrimaryNumbers" customModuleProvider="target">
-                                <rect key="frame" x="8" y="109" width="304" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fB-rF-BL1" customClass="RangedSlider" customModule="PrimaryNumbers" customModuleProvider="target">
+                                <rect key="frame" x="8" y="77" width="304" height="80"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="aoH-fX-hRr"/>
+                                    <constraint firstAttribute="height" constant="80" id="sDR-5w-nAx"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="anD-P8-l6g" firstAttribute="leading" secondItem="b8l-z3-Oh7" secondAttribute="trailing" constant="8" symbolic="YES" id="2BL-Nl-KCb"/>
+                            <constraint firstItem="6fB-rF-BL1" firstAttribute="top" secondItem="ERT-9E-4ua" secondAttribute="bottom" constant="8" symbolic="YES" id="1xL-RZ-d6y"/>
                             <constraint firstItem="tLZ-jn-3ld" firstAttribute="centerX" secondItem="dlw-dK-aQD" secondAttribute="centerX" id="4Xz-4T-Hm8"/>
-                            <constraint firstAttribute="trailing" secondItem="anD-P8-l6g" secondAttribute="trailing" constant="8" id="4fQ-LA-3bu"/>
                             <constraint firstAttribute="trailing" secondItem="ERT-9E-4ua" secondAttribute="trailing" constant="8" id="6I2-td-Djd"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dlw-dK-aQD" secondAttribute="bottom" constant="8" symbolic="YES" id="DY8-Wn-YF3"/>
-                            <constraint firstItem="b8l-z3-Oh7" firstAttribute="leading" secondItem="ERT-9E-4ua" secondAttribute="leading" id="EWA-8r-V27"/>
                             <constraint firstItem="MWe-Rc-G0f" firstAttribute="centerX" secondItem="dlw-dK-aQD" secondAttribute="centerX" id="GaR-la-Tf3"/>
                             <constraint firstItem="Y5Q-3M-c7r" firstAttribute="top" secondItem="6fB-rF-BL1" secondAttribute="bottom" symbolic="YES" id="JjF-vp-xpo"/>
                             <constraint firstItem="ERT-9E-4ua" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="NeX-7B-P0x"/>
@@ -119,10 +105,6 @@
                             <constraint firstItem="ERT-9E-4ua" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Tc1-Pj-Ntf"/>
                             <constraint firstItem="dlw-dK-aQD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="Tea-hN-Gw8"/>
                             <constraint firstItem="MWe-Rc-G0f" firstAttribute="top" secondItem="tLZ-jn-3ld" secondAttribute="bottom" constant="26.5" id="WKC-5G-b7T"/>
-                            <constraint firstItem="anD-P8-l6g" firstAttribute="top" secondItem="ERT-9E-4ua" secondAttribute="bottom" constant="2" id="bAM-I1-AGU"/>
-                            <constraint firstItem="b8l-z3-Oh7" firstAttribute="top" secondItem="anD-P8-l6g" secondAttribute="top" id="fVk-C6-UAA"/>
-                            <constraint firstItem="6fB-rF-BL1" firstAttribute="top" secondItem="b8l-z3-Oh7" secondAttribute="bottom" constant="8" symbolic="YES" id="gSS-X5-d8b"/>
-                            <constraint firstItem="b8l-z3-Oh7" firstAttribute="width" secondItem="anD-P8-l6g" secondAttribute="width" id="gkv-oC-hXm"/>
                             <constraint firstAttribute="trailing" secondItem="Y5Q-3M-c7r" secondAttribute="trailing" id="hz6-FD-zch"/>
                             <constraint firstItem="MWe-Rc-G0f" firstAttribute="centerY" secondItem="dlw-dK-aQD" secondAttribute="centerY" id="ph7-uc-p67"/>
                             <constraint firstItem="Y5Q-3M-c7r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="r7g-hw-w5a"/>
@@ -134,7 +116,6 @@
                     <connections>
                         <outlet property="calculateLbl" destination="tLZ-jn-3ld" id="2ah-L4-hyj"/>
                         <outlet property="collectionView" destination="dlw-dK-aQD" id="Po5-yz-BEJ"/>
-                        <outlet property="numTxtField" destination="anD-P8-l6g" id="0WL-UP-E0a"/>
                         <outlet property="progressView" destination="MWe-Rc-G0f" id="sCK-DL-7n7"/>
                         <outlet property="rangedSlider" destination="6fB-rF-BL1" id="rPE-si-0o6"/>
                         <outlet property="searchBar" destination="Y5Q-3M-c7r" id="XEu-ZV-Swi"/>

@@ -11,7 +11,6 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
   
   @IBOutlet var collectionView: UICollectionView!
-  @IBOutlet var numTxtField: UITextField!
   @IBOutlet var searchBar: UISearchBar!
   @IBOutlet var calculateLbl: UILabel!
   @IBOutlet var progressView: UIProgressView!
@@ -41,14 +40,15 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     collectionView.delegate = self
     searchBar.delegate = self
     searchBar.layer.borderColor = UIColor.white.cgColor
-    numTxtField.delegate = self
+    //numTxtField.delegate = self
     collectionView.layer.cornerRadius = 5
     hideProgress()
     
     let rangedSliderView = RangedSlider.create()
-    rangedSliderView.frame = rangedSlider.bounds
+		rangedSliderView.valuesChangedCallback = valuesChanged
+		rangedSliderView.frame = rangedSlider.bounds
     rangedSlider.addSubview(rangedSliderView)
-    
+		
   }
   
   private func hideProgress() {
@@ -67,21 +67,21 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
       self.progressView.setProgress(value, animated: true)
     }
   }
+	
+	private func valuesChanged(min: Int, max: Int) {
+		calc(min: min, max: max)
+	}
   
-  func calc(_: Any) {
+	private func calc(min: Int, max: Int) {
     
     self.view.endEditing(true)
-    guard let text = numTxtField.text else {
-      return
-    }
+
     ErrorHandler.try { [unowned self] in
-      let number = try self.presenter.getCorrectNumber(text: text)
       self.cleanCollectionView()
       self.showProgress()
       self.collectionView.isUserInteractionEnabled = false
-      self.presenter.calc(for: number, onProgress: self.onProgress, completion: {
-        [unowned self] in
-        DispatchQueue.main.async { [unowned self] in
+			self.presenter.calc(min: min, max: max, onProgress: self.onProgress, completion: {
+        DispatchQueue.main.async {
           self.collectionView.reloadData()
           self.collectionView.isUserInteractionEnabled = true
           self.hideProgress()
@@ -94,10 +94,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
   private func cleanCollectionView() {
     presenter.cleanPrimary()
     self.collectionView.reloadData()
-  }
-  
-  func textFieldDidEndEditing(_: UITextField) {
-    calc(self)
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -140,7 +136,7 @@ extension ViewController: UISearchBarDelegate {
   
   private func findNumber(_ number: Int) {
     collectionView.allowsMultipleSelection = false
-    let (firstIndex, secondIndex) = presenter.primary!.index(of: number)
+    let (firstIndex, secondIndex) = presenter.index(of: number)
     selectCell(at: firstIndex)
     if let secondIndex = secondIndex {
       collectionView.allowsMultipleSelection = true

@@ -9,50 +9,73 @@ import Foundation
 
 class Presenter {
 
-  private(set) var primary: Primary?
+	private var primary: Primary?
 
-  func getCorrectSearchNumber(text: String) throws -> Int {
-    let number = try getCorrectNumber(text: text)
+	var numbers: ArraySlice<Int> = []
 
-    guard let primary = primary else {
-      throw NumbersError.primaryNotExist
-    }
+	private var minIndex = 0
+	private var maxIndex = 0
 
-    if number > primary.num {
-      throw NumbersError.tooBig(num: number)
-    }
-    return number
-  }
+	func getCorrectSearchNumber(text: String) throws -> Int {
+		let number = try getCorrectNumber(text: text)
 
-  func getCorrectNumber(text: String) throws -> Int {
-    guard let number = Int(text), number > 0 else {
-      throw NumbersError.incorrectValue
-    }
-    return number
-  }
+		guard let primary = primary else {
+			throw NumbersError.primaryNotExist
+		}
 
-  func calc(for number: Int, onProgress: @escaping (Float) -> (), completion: @escaping () -> ()) {
+		if number > primary.num {
+			throw NumbersError.tooBig(num: number)
+		}
+		return number
+	}
 
-    DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
-      self.primary = Primary(num: number, onProgress: onProgress)
-      _ = self.primary!.calcAll()
-      completion()
-    }
-  }
-  
-  func cleanPrimary() {
-    primary = nil
-  }
-  
-  var countNumbers: Int {
-    return primary?.numbers.count ?? 0
-  }
-  
-  func number(at index: Int) -> Int? {
-    if index < countNumbers {
-      return primary?.numbers[index]
-    } else {
-      return nil
-    }
-  }
+	func getCorrectNumber(text: String) throws -> Int {
+		guard let number = Int(text), number > 0 else {
+			throw NumbersError.incorrectValue
+		}
+		return number
+	}
+
+	func calc(min: Int, max: Int, onProgress: @escaping (Float) -> (), completion: @escaping () -> ()) {
+		if let primary = primary, primary.num > max {
+			maxIndex = index(of: max).0
+			numbers = primary.numbers.dropLast(primary.numbers.count - maxIndex)
+
+			minIndex = index(of: min).0
+			numbers = numbers.dropFirst(minIndex)
+
+			completion()
+		
+		} else {
+			DispatchQueue.global(qos: .userInitiated).async { [unowned self] in
+				self.primary = Primary(num: max, onProgress: onProgress)
+				_ = self.primary!.calcAll()
+				
+				self.minIndex = self.index(of: min).0
+				self.numbers = self.primary!.numbers.dropFirst(self.minIndex)
+				
+				completion()
+			}
+		}
+	}
+
+	func cleanPrimary() {
+		numbers = []
+	}
+
+	var countNumbers: Int {
+		return numbers.count
+	}
+
+	func index(of number: Int) -> (Int, Int?) {
+		return primary!.index(of: number)
+	}
+
+	func number(at index: Int) -> Int? {
+		if index < countNumbers {
+			return numbers[minIndex + index]
+		} else {
+			return nil
+		}
+	}
 }

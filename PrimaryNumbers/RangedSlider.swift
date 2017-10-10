@@ -15,7 +15,6 @@ class RangedSlider: UIView {
   
 	@IBOutlet private var minTxt: UITextField!
 	@IBOutlet private var maxTxt: UITextField!
-
 	
 	var valuesChangedCallback: ((Int, Int)->())?
 	
@@ -47,6 +46,10 @@ class RangedSlider: UIView {
 	@IBAction private func maxSliderUp(_ sender: Any) {
 		maxTxt.text = "\(Int(maxSlider.value))"
 		valuesChangedCallback?(Int(minSlider.value), Int(maxSlider.value))
+		
+		if maxSlider.value > (maxSlider.maximumValue * 0.8) {
+			maxSlider.maximumValue *= 1.5
+		}
 	}
 	
 	@IBAction private func minSliderUp(_ sender: Any) {

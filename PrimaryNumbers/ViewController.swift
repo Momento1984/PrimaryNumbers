@@ -122,7 +122,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
 extension ViewController: UISearchBarDelegate {
   
-  
   func searchBar(_: UISearchBar, textDidChange: String) {
     ErrorHandler.try {
       let number = try presenter.getCorrectSearchNumber(text: textDidChange)
